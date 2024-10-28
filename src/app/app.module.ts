@@ -13,9 +13,11 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 
 import { HomeComponent } from './modules/home/home.component';
+import { LoginComponent } from './modules/home/login/login.component';
+import { SignupComponent } from './modules/home/signup/signup.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, SignupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

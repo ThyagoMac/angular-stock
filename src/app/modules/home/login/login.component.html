@@ -1,0 +1,38 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmitHandler()">
+  <p-card stileClass="mt-10" header="Stock Management">
+    <div
+      class="flex flex-column gap-3 justify-content-center align-content-center text-align-center"
+    >
+      <input
+        type="email"
+        pInputText
+        placeholder="Email"
+        formControlName="email"
+      />
+
+      <input
+        type="password"
+        pInputText
+        placeholder="Password"
+        formControlName="password"
+      />
+
+      <button
+        type="submit"
+        pButton
+        pRipple
+        label="Login"
+        [disabled]="!this.loginForm.valid"
+      ></button>
+
+      <footer>
+        <span
+          class="font-semibold pointer text-sm"
+          (click)="switchIsLogin.emit()"
+        >
+          Create an account
+        </span>
+      </footer>
+    </div>
+  </p-card>
+</form>
