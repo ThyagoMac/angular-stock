@@ -9,7 +9,6 @@ export class HomeComponent {
   isLogin = true;
 
   switchIsLogin(val: boolean) {
-    console.log('pipipi');
     this.isLogin = val;
   }
 }

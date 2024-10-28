@@ -1,15 +1,31 @@
-<form>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmitHandler()">
   <p-card stileClass="mt-10" header="Create Account">
     <div
       class="flex flex-column gap-3 justify-content-center align-content-center text-align-center"
     >
-      <input type="text" pInputText placeholder="Name" />
+      <input type="text" pInputText placeholder="Name" formControlName="name" />
 
-      <input type="email" pInputText placeholder="Email" />
+      <input
+        type="email"
+        pInputText
+        placeholder="Email"
+        formControlName="email"
+      />
 
-      <input type="password" pInputText placeholder="Password" />
+      <input
+        type="password"
+        pInputText
+        placeholder="Password"
+        formControlName="password"
+      />
 
-      <button type="submit" pButton pRipple label="Create"></button>
+      <button
+        type="submit"
+        pButton
+        pRipple
+        label="Create"
+        [disabled]="!this.signupForm.valid"
+      ></button>
 
       <footer>
         <span

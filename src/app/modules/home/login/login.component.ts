@@ -15,7 +15,7 @@ export class LoginComponent {
   });
 
   onSubmitHandler(): void {
-    console.log('pipi', this.loginForm.value);
+    console.log('login', this.loginForm.value);
   }
 
   constructor(private formBuilder: FormBuilder) {}
