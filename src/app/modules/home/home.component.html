@@ -4,7 +4,38 @@
       class="flex justify-content-center align-content-center text-algin-center"
     >
       <form action="">
-        <p-card> aaa </p-card>
+        <p-card stileClass="mt-10" header="Stock Management">
+          <div
+            class="flex flex-column gap-3 justify-content-center align-content-center text-align-center"
+          >
+            <input type="email" pInputText placeholder="Email" />
+
+            <input type="password" pInputText placeholder="Password" />
+
+            <button type="submit" pButton pRipple label="Login"></button>
+
+            <span class="font-semibold pointer">Create an account</span>
+          </div>
+        </p-card>
+      </form>
+
+      <!-- create acc -->
+      <form action="">
+        <p-card stileClass="mt-10" header="Create Account">
+          <div
+            class="flex flex-column gap-3 justify-content-center align-content-center text-align-center"
+          >
+            <input type="text" pInputText placeholder="Name" />
+
+            <input type="email" pInputText placeholder="Email" />
+
+            <input type="password" pInputText placeholder="Password" />
+
+            <button type="submit" pButton pRipple label="Create"></button>
+
+            <span class="font-semibold pointer">Already have acc? Login</span>
+          </div>
+        </p-card>
       </form>
     </div>
   </div>
