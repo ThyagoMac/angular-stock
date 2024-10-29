@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import {
+  UserLoginInterface,
+  UserSignupInterface,
+} from 'src/app/models/interfaces/user';
+import { UserService } from 'src/app/services/user/user.services';
 
 @Component({
   selector: 'app-signup',
@@ -16,8 +21,38 @@ export class SignupComponent {
   });
 
   onSubmitHandler(): void {
-    console.log('Signup', this.signupForm.value);
+    if (this.signupForm.valid) {
+      this.userService
+        .signupUser(this.signupForm.value as UserSignupInterface)
+        .subscribe({
+          next: (response) => {
+            if (response) {
+              this.login();
+            }
+          },
+          error: (err) => console.log('error: ', err),
+        });
+    }
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  login(): void {
+    if (this.signupForm.valid) {
+      this.userService
+        .authUser(this.signupForm.value as UserLoginInterface)
+        .subscribe({
+          next: (response) => {
+            if (response) {
+              console.log('logou: ', response);
+              this.signupForm.reset();
+            }
+          },
+          error: (err) => console.log('error: ', err),
+        });
+    }
+  }
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {}
 }
