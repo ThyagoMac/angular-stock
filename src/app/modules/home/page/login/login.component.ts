@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import { UserLoginInterface } from 'src/app/models/interfaces/user';
@@ -33,6 +34,8 @@ export class LoginComponent {
                 summary: 'Success',
                 detail: `Welcome ${response?.name}...`,
               });
+
+              this.router.navigate(['/dashboard']);
             }
           },
           error: (err) => {
@@ -50,6 +53,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private cookieService: CookieService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 }

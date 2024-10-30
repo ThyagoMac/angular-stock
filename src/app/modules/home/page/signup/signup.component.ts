@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
 import {
@@ -55,6 +56,8 @@ export class SignupComponent {
             if (response) {
               this.cookieService.set('USER_TOKEN', response?.token);
               this.signupForm.reset();
+
+              this.router.navigate(['/dashboard']);
             }
           },
           error: (err) => {
@@ -72,6 +75,7 @@ export class SignupComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private cookieService: CookieService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 }
