@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import {
   UserLoginInterface,
@@ -15,7 +16,7 @@ import { environment } from 'src/environments/environments';
 export class UserService {
   private API_URL = environment.API_URL;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookie: CookieService) {}
 
   signupUser(
     data: UserSignupInterface
@@ -31,5 +32,10 @@ export class UserService {
       `${this.API_URL}/auth`,
       data
     );
+  }
+
+  isLogged(): boolean {
+    const token = this.cookie.get('USER_TOKEN');
+    return token ? true : false;
   }
 }

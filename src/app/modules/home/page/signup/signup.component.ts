@@ -53,7 +53,7 @@ export class SignupComponent {
         .subscribe({
           next: (response) => {
             if (response) {
-              this.cookieService.set('USER_INFO', response?.token);
+              this.cookieService.set('USER_TOKEN', response?.token);
               this.signupForm.reset();
             }
           },
