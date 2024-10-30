@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
 import { UserLoginInterface } from 'src/app/models/interfaces/user';
 import { UserService } from 'src/app/services/user/user.services';
 
@@ -23,18 +25,31 @@ export class LoginComponent {
         .subscribe({
           next: (response) => {
             if (response) {
+              this.cookieService.set('USER_INFO', response?.token);
               this.loginForm.reset();
-              console.log('logou: ', response);
+
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: `Welcome ${response?.name}...`,
+              });
             }
           },
-          error: (err) => console.log('error: ', err),
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err?.error?.error}`,
+            });
+          },
         });
     }
-    console.log('login', this.loginForm.value);
   }
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private cookieService: CookieService,
+    private messageService: MessageService
   ) {}
 }

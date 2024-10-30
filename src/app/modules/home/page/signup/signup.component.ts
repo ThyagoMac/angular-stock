@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
 import {
   UserLoginInterface,
   UserSignupInterface,
@@ -25,12 +27,21 @@ export class SignupComponent {
       this.userService
         .signupUser(this.signupForm.value as UserSignupInterface)
         .subscribe({
-          next: (response) => {
-            if (response) {
-              this.login();
-            }
+          next: () => {
+            this.login();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: `Accound ${this.signupForm.value.name} created. Redirecting to home page...`,
+            });
           },
-          error: (err) => console.log('error: ', err),
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err?.error?.error}`,
+            });
+          },
         });
     }
   }
@@ -42,17 +53,25 @@ export class SignupComponent {
         .subscribe({
           next: (response) => {
             if (response) {
-              console.log('logou: ', response);
+              this.cookieService.set('USER_INFO', response?.token);
               this.signupForm.reset();
             }
           },
-          error: (err) => console.log('error: ', err),
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `${err?.error?.error}`,
+            });
+          },
         });
     }
   }
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private cookieService: CookieService,
+    private messageService: MessageService
   ) {}
 }
