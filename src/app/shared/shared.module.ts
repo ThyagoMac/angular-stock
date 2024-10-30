@@ -7,9 +7,12 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ToolbarNavigationComponent } from './components/toolbar-navigation/toolbar-navigation.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ToolbarNavigationComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
